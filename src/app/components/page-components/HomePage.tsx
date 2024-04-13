@@ -62,10 +62,34 @@ export default function HomePage() {
 
           {/* Will display upgrades for player to purchase */}
           <div className="right">
-            <div className="upgrade">
-              <div className="left-section"></div>
-              <div className="middle-section"></div>
-              <div className="right section"></div>
+            {/* Individual helper units */}
+            <div className="helper flex h-24 w-96 items-center border justify-center">
+              <div className="left-section flex justify-center items-center">
+                <Image
+                  src="/images/helpers/deku-scrub-base.png"
+                  alt="deku scrub helper"
+                  width={65}
+                  height={65}
+                  draggable="false"
+                />
+              </div>
+
+              <div className="middle-section flex justify-center items-center flex-col">
+                <h4>Deku Scrub</h4>
+                <div className="flex p-2">
+                  <p className="pr-2">Cost: 10</p>
+                  <Image
+                    src="/images/rupees/rupee-green.png"
+                    alt="diamond"
+                    width={15}
+                    height={15}
+                    draggable="false"
+                  />
+                </div>
+              </div>
+              <div className="right section">
+                <p>level 0</p>
+              </div>
             </div>
           </div>
         </div>
