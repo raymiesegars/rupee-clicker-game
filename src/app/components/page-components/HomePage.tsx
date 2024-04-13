@@ -2,11 +2,29 @@
 
 import Head from "next/head";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function HomePage() {
   const [rupees, setRupees] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
+
+  // Load rupees from localStorage when component mounts
+  useEffect(() => {
+    const savedRupees = localStorage.getItem("rupees");
+    if (savedRupees) {
+      setRupees(Number(savedRupees));
+    }
+  }, []);
+
+  // Save rupees to localStorage whenever it changes
+  useEffect(() => {
+    const intervaliId = setInterval(
+      () => {
+        localStorage.setItem("rupees", String(rupees));
+      },
+      5 * 60 * 1000,
+    ); // Save every 5 minutes
+  }, [rupees]);
 
   function incrementGem() {
     setRupees(rupees + 1);
@@ -25,7 +43,7 @@ export default function HomePage() {
       </Head>
 
       <section>
-        <div className="main flex">
+        <div className="main flex select-none">
           {/* Will display current total currency of player */}
           <div className="">
             <h3 className="mb-4 text-center">
@@ -37,12 +55,19 @@ export default function HomePage() {
               width={150}
               height={150}
               onClick={incrementGem}
+              draggable="false"
               className={`cursor-pointer transition duration-300 ease-in-out hover:scale-105 hover:opacity-95 ${isClicked ? "clickAnimation" : ""}`}
             />
           </div>
 
           {/* Will display upgrades for player to purchase */}
-          <div className="right">right</div>
+          <div className="right">
+            <div className="upgrade">
+              <div className="left-section"></div>
+              <div className="middle-section"></div>
+              <div className="right section"></div>
+            </div>
+          </div>
         </div>
       </section>
     </>
