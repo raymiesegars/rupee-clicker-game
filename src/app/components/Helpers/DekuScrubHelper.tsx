@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function HelperBox() {
+export default function DekuScrubHelper() {
   return (
     <div className="helper shadow-light flex h-24 w-full items-center justify-between rounded border-2 border-gray-500 p-4 md:w-96">
       <div className="left-section flex items-center justify-center">

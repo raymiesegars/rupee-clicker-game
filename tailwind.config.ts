@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme"
 
 const config: Config = {
   content: [
@@ -16,6 +17,11 @@ const config: Config = {
       boxShadow: {
         light:
           "0 10px 15px -3px rgba(255, 255, 255, 0.1), 0 4px 6px -2px rgba(255, 255, 255, 0.05)",
+      },
+      fontFamily: {
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+        heading: ["var(--font-heading)", ...fontFamily.sans],
+        link: ["var(--font-link)", ...fontFamily.mono],
       },
     },
   },

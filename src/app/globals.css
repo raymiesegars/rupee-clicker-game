@@ -42,3 +42,7 @@ body {
 .clickAnimation {
   animation: clickAnimation 0.2s;
 }
+
+.head-text-md {
+  @apply font-heading text-5xl font-extrabold leading-[1.15] sm:text-7xl;
+}
