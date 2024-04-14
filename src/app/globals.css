@@ -46,3 +46,7 @@ body {
 .head-text-md {
   @apply font-heading text-5xl font-extrabold leading-[1.15] sm:text-7xl;
 }
+
+.head-text-sm {
+  @apply font-heading text-3xl font-extrabold leading-[1.15] sm:text-3xl;
+}

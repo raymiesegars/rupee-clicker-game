@@ -1,8 +1,23 @@
+import { DekuScrubHelperProps } from "@/interfaces/types";
 import Image from "next/image";
+import BigNumber from "bignumber.js";
+import { formatNumber } from "@/utils/utils";
 
-export default function DekuScrubHelper() {
+export default function DekuScrubHelper({
+  level,
+  onBuy,
+  cost,
+  baseProduction,
+}: DekuScrubHelperProps) {
+  const formattedCost = formatNumber(cost);
+  const currentProduction = new BigNumber(baseProduction).multipliedBy(level);
+  const formattedProduction = formatNumber(currentProduction);
+
   return (
-    <div className="helper shadow-light flex h-24 w-full items-center justify-between rounded border-2 border-gray-500 p-4 md:w-96">
+    <button
+      onClick={onBuy}
+      className="shadow-light flex h-24 w-full items-center justify-between rounded border-2 border-gray-500 p-4 md:w-96"
+    >
       <div className="left-section flex items-center justify-center">
         <Image
           src="/images/helpers/deku-scrub-base.png"
@@ -16,7 +31,7 @@ export default function DekuScrubHelper() {
       <div className="middle-section flex flex-col items-center justify-center">
         <h4 className="text-white">Deku Scrub</h4>
         <div className="flex p-2">
-          <p className="pr-2 text-white">Cost: 10</p>
+          <p className="pr-2 text-white">Cost: {formattedCost}</p>
           <Image
             src="/images/rupees/rupee-green.png"
             alt="diamond"
@@ -24,11 +39,15 @@ export default function DekuScrubHelper() {
             height={12}
             draggable="false"
           />
+          
         </div>
       </div>
       <div className="right-section">
-        <p className="text-white">Level 0</p>
+        <p className="text-white">Level {level}</p>
+        <div className="flex p-2">
+          <p className="pr-2 text-white">r/s: {formattedProduction}</p>
+        </div>
       </div>
-    </div>
+    </button>
   );
 }
