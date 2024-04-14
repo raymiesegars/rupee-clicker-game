@@ -6,7 +6,19 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Home() {
   return (
     <>
-      <ToastContainer />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        toastClassName="my-toast"
+        progressClassName="my-toast-progress"
+      />
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <Head>
           <title>Rupee Clicker</title>

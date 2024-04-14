@@ -5,7 +5,17 @@ import { toast } from "react-toastify";
 export function useStateRupees() {
   const [rupees, setRupees] = useState<BigNumber>(new BigNumber(0));
   const [dekuScrubLevel, setDekuScrubLevel] = useState<number>(0);
+  const [rupeesPerSecond, setRupeesPerSecond] = useState<BigNumber>(
+    new BigNumber(0),
+  );
+
   const [isClicked, setIsClicked] = useState(false);
+
+  // For rupees per second calculation
+  useEffect(() => {
+    const newRPS = new BigNumber(dekuScrubLevel * 0.1);
+    setRupeesPerSecond(newRPS);
+  }, [dekuScrubLevel]);
 
   //Refs
   const rupeesRef = useRef<BigNumber | null>(null);
@@ -18,7 +28,6 @@ export function useStateRupees() {
   }
 
   function updateDekuScrubLevel(value: number) {
-    console.log("Updating DekuScrubLevel to:", value);
     setDekuScrubLevel(value);
     dekuScrubLevelRef.current = value;
   }
@@ -45,6 +54,8 @@ export function useStateRupees() {
       localStorage.setItem("gameData", JSON.stringify(data));
       toast.info("Game data saved successfully!", {
         position: "bottom-right",
+        className: "my-toast",
+        progressClassName: "my-toast-progress",
       });
     }, 60000); // Save every 1 minutes
 
@@ -63,6 +74,7 @@ export function useStateRupees() {
     rupees,
     dekuScrubLevel,
     updateDekuScrubLevel,
+    rupeesPerSecond,
     isClicked,
     incrementGem,
   };

@@ -9,14 +9,12 @@ import BigNumber from "bignumber.js";
 import { formatNumber } from "@/utils/utils";
 
 export default function HomePage() {
-  const { rupees, dekuScrubLevel, updateDekuScrubLevel, isClicked, incrementGem } = useStateRupees();
-  const [rupeesPerSecond, setRupeesPerSecond] = useState<BigNumber>(new BigNumber(0));
+  const { rupees, dekuScrubLevel, updateDekuScrubLevel, rupeesPerSecond, isClicked, incrementGem } = useStateRupees();
 
   useEffect(() => {
     const interval = setInterval(() => {
       incrementGem(rupeesPerSecond);
     }, 1000);
-
     return () => clearInterval(interval);
   }, [rupeesPerSecond, incrementGem]);
 
@@ -33,7 +31,6 @@ export default function HomePage() {
     if (rupees.gte(currentCost)) {
       incrementGem(currentCost.negated());
       updateDekuScrubLevel(dekuScrubLevel + 1); // Use updateDekuScrubLevel instead of setDekuScrubLevel
-      setRupeesPerSecond(rupeesPerSecond.plus(new BigNumber(0.1)));
     }
   };
 
