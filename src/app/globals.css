@@ -34,11 +34,35 @@ body {
 
 /* Animation for clicking the rupee */
 @keyframes clickAnimation {
-  0% { transform: scale(1); }
-  50% { transform: scale(0.9); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .clickAnimation {
   animation: clickAnimation 0.2s;
+}
+
+.head-text-md {
+  @apply font-heading text-5xl font-extrabold leading-[1.15] sm:text-7xl;
+}
+
+.head-text-sm {
+  @apply font-heading text-3xl font-extrabold leading-[1.15] sm:text-3xl;
+}
+
+/* Toast Styles */
+
+.my-toast {
+  @apply rounded-md bg-green-500 p-3 text-white shadow-lg;
+}
+
+.my-toast-progress {
+  @apply h-1 rounded-b-md bg-yellow-500;
 }
