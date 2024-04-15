@@ -80,7 +80,6 @@ export function useStateRupees() {
     return () => clearInterval(intervalId);
   }, []);
 
-  
   const buyHelper = useCallback(
     (name: string, quantity: number) => {
       setHelpers((prevHelpers) => {
