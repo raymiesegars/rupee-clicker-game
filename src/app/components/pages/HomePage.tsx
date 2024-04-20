@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useStateRupees } from "@/hooks/useStateRupees";
-import { useEffect } from "react";
 import { formatNumber } from "@/utils/utils";
 import HelpersUi from "../Helpers/HelpersUi";
 import BigNumber from "bignumber.js";

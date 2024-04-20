@@ -18,6 +18,14 @@ export function useStateRupees() {
       level: 0,
       costIncreaseFactor: 1.15,
     },
+    {
+      name: "Cucco",
+      image: "/images/helpers/cucco-base.png",
+      costBase: new BigNumber(100),
+      productionBase: 1,
+      level: 0,
+      costIncreaseFactor: 1.15,
+    }
     // Additional helpers can be added here
   ]);
   const [rupeesPerSecond, setRupeesPerSecond] = useState(new BigNumber(0));
