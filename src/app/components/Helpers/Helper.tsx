@@ -2,25 +2,8 @@ import { HelperProps } from "@/interfaces/types";
 import Image from "next/image";
 import BigNumber from "bignumber.js";
 import { formatNumber } from "@/utils/utils";
-import { useEffect, useState } from "react";
 
 export default function Helper({ helper, buyHelper, quantity }: HelperProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    if (helper) {
-      setIsLoaded(true);
-    }
-}, [helper]);
-
-if (!isLoaded) {
-  return (
-    <div className="flex h-24 w-full items-center justify-between rounded border-2 border-gray-500 p-4 md:w-96">
-      <p>Loading...</p>
-    </div>
-  );
-}
-
   const cost = helper.costBase.multipliedBy(
     new BigNumber(helper.costIncreaseFactor).pow(helper.level),
   );
@@ -49,6 +32,7 @@ if (!isLoaded) {
         <h4 className="text-white">{helper.name}</h4>
         <div className="flex p-2">
           <p className="pr-2 text-white">Cost: {formattedCost}</p>
+          <Image src="/images/rupees/rupee-green.png" alt="rupee" width={12} height={12} />
         </div>
       </div>
       <div className="right-section">
