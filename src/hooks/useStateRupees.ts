@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef, useCallback, useContext } from "rea
 import BigNumber from "bignumber.js";
 import { toast } from "react-toastify";
 import { Helper } from "@/interfaces/types";
+import { defaultHelpers } from "@/interfaces/helpers";
 
 const rupeesContext = React.createContext(0);
 
@@ -18,6 +19,30 @@ export function useStateRupees() {
       level: 0,
       costIncreaseFactor: 1.15,
     },
+    {
+      name: "Cucco",
+      image: "/images/helpers/cucco-base.png",
+      costBase: new BigNumber(100),
+      productionBase: 1,
+      level: 0,
+      costIncreaseFactor: 1.15,
+    },
+    {
+      name: "Korok",
+      image: "/images/helpers/korok-base.png",
+      costBase: new BigNumber(1000),
+      productionBase: 10,
+      level: 0,
+      costIncreaseFactor: 1.15,
+    },
+    {
+      name: "Minish",
+      image: "/images/helpers/minish-base.png",
+      costBase: new BigNumber(12500),
+      productionBase: 45,
+      level: 0,
+      costIncreaseFactor: 1.15,
+    },
     // Additional helpers can be added here
   ]);
   const [rupeesPerSecond, setRupeesPerSecond] = useState(new BigNumber(0));
@@ -25,6 +50,9 @@ export function useStateRupees() {
   
   const rupeesRef = useRef(rupees);
   const helpersRef = useRef(helpers);
+  const lastToastTimeRef = useRef(0); // Ref to track the last toast time
+
+  const toastCooldown = 3000; // Cooldown in milliseconds (e.g., 3000ms or 3 seconds)
 
   // Update refs whenever rupees or helpers change
   useEffect(() => {
@@ -51,15 +79,26 @@ export function useStateRupees() {
     if (savedData) {
       const data = JSON.parse(savedData);
       setRupees(new BigNumber(data.rupees || 0));
-      if (data.helpers) {
-        setHelpers(
-          data.helpers.map((helper: Helper) => ({
-            ...helper,
-            costBase: new BigNumber(helper.costBase),
-            level: helper.level,
-          })),
-        );
-      }
+      
+      // Merge saved helpers with default helpers
+      const loadedHelpers = defaultHelpers.map(defaultHelper => {
+        const savedHelper = data.helpers.find((h: Helper) => h.name === defaultHelper.name);
+        if (savedHelper) {
+          return {
+            ...defaultHelper,
+            ...savedHelper,
+            costBase: new BigNumber(savedHelper.costBase),
+            level: savedHelper.level,
+          };
+        } else {
+          return defaultHelper; // Use default if no saved data exists for this helper
+        }
+      });
+      
+      setHelpers(loadedHelpers);
+    } else {
+      // Use default helpers if no saved data exists
+      setHelpers(defaultHelpers);
     }
   }, []);
 
@@ -80,35 +119,27 @@ export function useStateRupees() {
     return () => clearInterval(intervalId);
   }, []);
 
-  const buyHelper = useCallback(
-    (name: string, quantity: number) => {
-      setHelpers((prevHelpers) => {
-        
-        const updatedHelpers = prevHelpers.map((helper) => {
-          if (helper.name === name) {
-            const cost = calculateCost(helper, quantity);
-
-            if (rupees.gte(cost)) {
-              // Perform rupee subtraction outside the mapping to avoid multiple deductions
-              setRupees((prevRupees) => {
-                const newRupees = prevRupees.minus(cost);
-
-                return newRupees;
-              });
-              console.log({...helper, level: helper.level + quantity})
-              return { ...helper, level: helper.level + quantity };
-            } else {
+  const buyHelper = useCallback((name: string, quantity: number) => {
+    setHelpers((prevHelpers) => {
+      const updatedHelpers = prevHelpers.map(helper => {
+        if (helper.name === name) {
+          const cost = calculateCost(helper, quantity);
+          if (rupees.gte(cost)) {
+            setRupees(prevRupees => prevRupees.minus(cost));
+            return { ...helper, level: helper.level + quantity };
+          } else {
+            const currentTime = Date.now();
+            if (currentTime - lastToastTimeRef.current > toastCooldown) {
               toast.error("Not enough rupees!", { position: "bottom-right" });
+              lastToastTimeRef.current = currentTime;
             }
           }
-          console.log(helper)
-          return helper;
-        });
-        return updatedHelpers;
+        }
+        return helper;
       });
-    },
-    [rupees],
-  );
+      return updatedHelpers;
+    });
+  }, [rupees]);
 
   const calculateCost = (helper: Helper, quantity: number): BigNumber => {
     let totalCost = new BigNumber(0);

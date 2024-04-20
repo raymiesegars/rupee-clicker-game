@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useStateRupees } from "@/hooks/useStateRupees";
-import { useEffect } from "react";
 import { formatNumber } from "@/utils/utils";
 import HelpersUi from "../Helpers/HelpersUi";
 import BigNumber from "bignumber.js";
@@ -22,8 +21,12 @@ export default function HomePage() {
   return (
     <section className="flex w-full flex-wrap items-center justify-between">
       {/* Left Section */}
-      <div className="flex flex-1 items-center justify-center p-4">
-        <h3 className="head-text-md">Left</h3>
+      <div className=" flex-1 items-center justify-center p-2">
+        <h3 className="head-text-sm">Non profit, open source.</h3>
+        <h3 className="head-text-sm">All rights to Nintendo&#174;</h3>
+        <p className="p-2">This game is in extremely early development, game data only saves locally at the moment however eventually cloud saves with leaderboards will be implemented.</p>{""}
+        <p className="p-2">Game data saves to your local storage automatically every 60 seconds.</p>{""}
+        <p className="p-2">This is an independent, non-commercial, fan-created project and is not affiliated with or endorsed by Nintendo Co., Ltd. It is open source and free. All original rights in the Zelda franchise belong to Nintendo. This game is intended for personal use only.</p>
       </div>
 
       {/* Center Section */}

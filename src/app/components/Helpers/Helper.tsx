@@ -32,6 +32,7 @@ export default function Helper({ helper, buyHelper, quantity }: HelperProps) {
         <h4 className="text-white">{helper.name}</h4>
         <div className="flex p-2">
           <p className="pr-2 text-white">Cost: {formattedCost}</p>
+          <Image src="/images/rupees/rupee-green.png" alt="rupee" width={12} height={12} />
         </div>
       </div>
       <div className="right-section">
