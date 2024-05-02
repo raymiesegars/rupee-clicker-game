@@ -9,11 +9,19 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        'dark-black': '#000000',
+        'light-gray-tan': '#e0e0d1',
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      gradientColorStops: theme => ({
+        'start': '#000000',  // Black
+        'end': '#e0e0d1',   // Light gray/tan
+      }),
       boxShadow: {
         light:
           "0 10px 15px -3px rgba(255, 255, 255, 0.1), 0 4px 6px -2px rgba(255, 255, 255, 0.05)",

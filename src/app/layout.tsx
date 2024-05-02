@@ -35,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(
-          "min-h-screen bg-background font-sans antialiased overflow-x-hidden",
+          "min-h-screen bg-gradient-to-b from-light-gray-tan to-dark-blackont-sans antialiased overflow-x-hidden",
           fontSans.variable,
           fontHeading.variable,
           fontLink.variable,

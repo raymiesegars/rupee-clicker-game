@@ -66,3 +66,17 @@ body {
 .my-toast-progress {
   @apply h-1 rounded-b-md bg-yellow-500;
 }
+
+/* Switch Styles */
+.switch input:checked + .slider {
+  transform: translateX(100%);
+}
+.switch input:checked {
+  background-color: #4ade80;
+}
+.switch {
+  background-color: #d1d5db;
+}
+.switch:hover {
+  background-color: #cbd5e1;
+}
