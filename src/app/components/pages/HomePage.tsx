@@ -26,9 +26,9 @@ export default function HomePage() {
   const [isRotating, setIsRotating] = useState(false);
 
   return (
-    <section className="flex w-full flex-wrap items-center justify-between">
+    <section className="flex w-full items-center justify-between">
     {/* Left Section */}
-    <div className="flex-1 items-center justify-center p-2">
+    <div className="w-1/4 p-4 static">
       {/* Toggle Slider */}
       <div className="flex items-center justify-center p-4 head-text-sm">
       <span className="mr-2">3D Toggle:</span>
@@ -45,6 +45,7 @@ export default function HomePage() {
       <p className="p-2">This game is in extremely early development, game data only saves locally at the moment however eventually cloud saves with leaderboards will be implemented.</p>{""}
       <p className="p-2">Game data saves to your local storage automatically every 60 seconds.</p>{""}
       <p className="p-2">This is an independent, non-commercial, fan-created project and is not affiliated with or endorsed by Nintendo Co., Ltd. It is open source and free. All original rights in the Zelda franchise belong to Nintendo. This game is intended for personal use only.</p>
+      <p className="font-bold">Rupee by animatezach is licensed under CC Attribution-NonCommercial-NoDerivs.</p>
     </div>
 
       {/* Center Section */}
@@ -94,7 +95,9 @@ export default function HomePage() {
       </div>
 
       {/* Right Section */}
-      <HelpersUi helpers={helpers} buyHelper={buyHelper} />
+      <div className="w-2/7 p-4 static">
+        <HelpersUi helpers={helpers} buyHelper={buyHelper} />
+      </div>
     </section>
   );
 }
