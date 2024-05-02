@@ -6,7 +6,7 @@ import { formatNumber } from "@/utils/utils";
 export default function Helper({ helper, buyHelper, quantity }: HelperProps) {
   const cost = helper.costBase.multipliedBy(
     new BigNumber(helper.costIncreaseFactor).pow(helper.level),
-  );
+  ).multipliedBy(quantity);
   const formattedCost = formatNumber(cost);
   const currentProduction = new BigNumber(helper.productionBase).multipliedBy(
     helper.level,

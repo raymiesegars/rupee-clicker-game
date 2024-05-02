@@ -1,0 +1,1 @@
+passive rupee going up doesn't trigger when purchasing 
